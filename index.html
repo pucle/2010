@@ -1,36 +1,1107 @@
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="images/gift.png" type="image/x-icon">
-  <link rel="stylesheet" href="css/index.css">
+  <title>Ngày của những đóa hoa 20/10</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  <!-- Document Title -->
-  <title>FLOWERS FOR SOMEONE</title>
+    :root {
+      --pink-dark: #ff6b9d;
+      --pink-light: #ffd6e8;
+      --pink-medium: #ffb3d1;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #ffd6e8 0%, #ffc4dd 25%, #ffb3d1 50%, #ffa8c9 75%, #ff9dc4 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body.not-loaded * {
+      animation-play-state: paused !important;
+    }
+
+    /* Welcome Screen */
+    .welcome-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: 10000;
+      background: linear-gradient(135deg, #000 0%, #1a1a2e 50%, #16213e 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 1s ease, visibility 1s ease;
+      overflow: hidden;
+    }
+
+    .welcome-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .night {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      filter: blur(0.1vmin);
+      background-image: radial-gradient(ellipse at top, transparent 0%, #000),
+        radial-gradient(ellipse at bottom, #000, rgba(255, 182, 193, 0.3));
+      z-index: 0;
+    }
+
+    .flower-container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      height: 50vh;
+      width: 100%;
+    }
+
+    .flowers {
+      position: relative;
+      transform: scale(0.6);
+    }
+
+    .flower {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      margin-left: -10vmin;
+      transform-origin: bottom center;
+      z-index: 10;
+    }
+
+    .flower--1 {
+      animation: moving-flower-1 4s linear infinite;
+    }
+
+    .flower--2 {
+      margin-left: 0;
+      transform: rotate(20deg);
+      animation: moving-flower-2 4s linear infinite;
+    }
+
+    .flower--3 {
+      margin-left: -20vmin;
+      transform: rotate(-15deg);
+      animation: moving-flower-3 4s linear infinite;
+    }
+
+    .flower__leafs {
+      position: relative;
+      animation: blooming-flower 2s backwards;
+    }
+
+    .flower__leafs--1 { animation-delay: 0.5s; }
+    .flower__leafs--2 { animation-delay: 0.8s; }
+    .flower__leafs--3 { animation-delay: 1.1s; }
+
+    .flower__leafs::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -100%);
+      width: 8vmin;
+      height: 8vmin;
+      background-color: #ffb6c1;
+      filter: blur(10vmin);
+    }
+
+    .flower__leaf {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 8vmin;
+      height: 11vmin;
+      border-radius: 51% 49% 47% 53%/44% 45% 55% 69%;
+      background-image: linear-gradient(to top, #ff69b4, #ffb6c1);
+      transform-origin: bottom center;
+      opacity: 0.9;
+      box-shadow: inset 0 0 2vmin rgba(255, 255, 255, 0.5);
+    }
+
+    .flower__leaf--1 { transform: translate(-10%, 1%) rotateY(40deg) rotateX(-50deg); }
+    .flower__leaf--2 { transform: translate(-50%, -4%) rotateX(40deg); }
+    .flower__leaf--3 { transform: translate(-90%, 0%) rotateY(45deg) rotateX(50deg); }
+    .flower__leaf--4 {
+      width: 8vmin;
+      height: 8vmin;
+      border-radius: 4vmin 10vmin 4vmin 4vmin;
+      transform: translate(0%, 18%) rotateX(70deg) rotate(-43deg);
+      z-index: 1;
+      opacity: 0.8;
+    }
+
+    .flower__white-circle {
+      position: absolute;
+      left: -3.5vmin;
+      top: -3vmin;
+      width: 9vmin;
+      height: 4vmin;
+      border-radius: 50%;
+      background-color: #fff;
+    }
+
+    .flower__white-circle::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 45%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      height: 60%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, rgb(255, 235, 18), rgb(255, 206, 0));
+    }
+
+    .flower__line {
+      height: 55vmin;
+      width: 1.5vmin;
+      background-image: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent, rgba(255, 255, 255, 0.2)),
+        linear-gradient(to top, transparent 10%, #ff69b4, #ffb6c1);
+      box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+      animation: grow-flower-tree 2s backwards;
+    }
+
+    .flower--1 .flower__line { animation-delay: 0.3s; }
+    .flower--2 .flower__line { animation-delay: 0.6s; }
+    .flower--3 .flower__line { animation-delay: 0.9s; }
+
+    .flower__line__leaf {
+      position: absolute;
+      top: 20%;
+      left: 90%;
+      width: 7vmin;
+      height: 9vmin;
+      border-top-right-radius: 9vmin;
+      border-bottom-left-radius: 9vmin;
+      background-image: linear-gradient(to top, rgba(255, 105, 180, 0.4), #ffb6c1);
+    }
+
+    .flower__line__leaf--1 { transform: rotate(70deg) rotateY(30deg); animation: blooming-leaf-right 0.8s 1s backwards; }
+    .flower__line__leaf--2 { top: 45%; transform: rotate(70deg) rotateY(30deg); animation: blooming-leaf-right 0.8s 0.8s backwards; }
+    .flower__line__leaf--3 {
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 9vmin;
+      border-bottom-right-radius: 9vmin;
+      left: -460%;
+      top: 12%;
+      transform: rotate(-70deg) rotateY(30deg);
+      animation: blooming-leaf-left 0.8s 0.6s backwards;
+    }
+    .flower__line__leaf--4 {
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 9vmin;
+      border-bottom-right-radius: 9vmin;
+      left: -460%;
+      top: 40%;
+      transform: rotate(-70deg) rotateY(30deg);
+      animation: blooming-leaf-left 0.8s 0.4s backwards;
+    }
+
+    .flower__light {
+      position: absolute;
+      bottom: 0;
+      width: 1vmin;
+      height: 1vmin;
+      background-color: rgb(255, 251, 0);
+      border-radius: 50%;
+      filter: blur(0.2vmin);
+      animation: light-ans 4s linear infinite backwards;
+    }
+
+    .flower__light:nth-child(odd) { background-color: #ff69b4; }
+    .flower__light--1 { left: -2vmin; animation-delay: 1s; }
+    .flower__light--2 { left: 3vmin; animation-delay: 0.5s; }
+    .flower__light--3 { left: -6vmin; animation-delay: 0.3s; }
+    .flower__light--4 { left: 6vmin; animation-delay: 0.9s; }
+    .flower__light--5 { left: -1vmin; animation-delay: 1.5s; }
+    .flower__light--6 { left: -4vmin; animation-delay: 3s; }
+    .flower__light--7 { left: 3vmin; animation-delay: 2s; }
+    .flower__light--8 { left: -6vmin; animation-delay: 3.5s; }
+
+    .welcome-title {
+      position: relative;
+      z-index: 2;
+      color: white;
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(40px, 8vw, 70px);
+      text-shadow: 
+        0 0 10px rgba(255, 182, 193, 0.8),
+        0 0 20px rgba(255, 182, 193, 0.6),
+        0 0 30px rgba(255, 182, 193, 0.4);
+      text-align: center;
+      margin-top: 5vh;
+      letter-spacing: 5px;
+      opacity: 0;
+      animation: titleReveal 1s 2.5s forwards;
+    }
+
+    .welcome-title span {
+      display: inline-block;
+      opacity: 0;
+      animation: charAppear 0.5s ease forwards;
+    }
+
+    .continue-btn {
+      position: relative;
+      z-index: 2;
+      margin-top: 5vh;
+      padding: 15px 40px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+      font-family: 'Quicksand', sans-serif;
+      opacity: 0;
+      animation: btnAppear 1s 4.5s forwards;
+      transition: all 0.3s;
+    }
+
+    .continue-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 25px rgba(255, 107, 157, 0.5);
+    }
+
+    /* Main Content */
+    .main-content {
+      width: 100%;
+      max-width: 900px;
+      padding: 20px;
+      margin: 0 auto;
+      opacity: 0;
+      transition: opacity 1s ease;
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .main-content.visible {
+      opacity: 1;
+    }
+
+    .flower-bg {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: float 15s infinite;
+      z-index: -1;
+      pointer-events: none;
+      object-fit: cover;
+      border: 2px solid rgba(255, 182, 193, 0.3);
+      box-shadow: 0 4px 10px rgba(255, 182, 193, 0.3);
+    }
+
+    .flower-bg.emoji {
+      font-size: 30px;
+      border: none;
+      box-shadow: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .heart {
+      position: fixed;
+      color: #ff6b9d;
+      font-size: 24px;
+      opacity: 0.6;
+      animation: heartBeat 3s infinite;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .header {
+      text-align: center;
+      margin: 0 0 30px 0;
+      animation: fadeInDown 1s ease;
+      width: 100%;
+    }
+
+    .main-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 52px;
+      color: #fff;
+      text-shadow: 
+        0 0 10px rgba(255, 182, 193, 0.8),
+        0 0 20px rgba(255, 182, 193, 0.6),
+        0 0 30px rgba(255, 182, 193, 0.4);
+      margin-bottom: 10px;
+      animation: glow 2s ease-in-out infinite;
+    }
+
+    .subtitle {
+      font-family: 'Pacifico', cursive;
+      font-size: 28px;
+      color: #fff;
+      text-shadow: 0 0 8px rgba(255, 182, 193, 0.6);
+    }
+
+    .input-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 30px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(255, 182, 193, 0.4);
+      margin-bottom: 30px;
+      animation: fadeInUp 1s ease;
+      border: 3px solid rgba(255, 182, 193, 0.3);
+      width: 100%;
+    }
+
+    .input-label {
+      font-size: 20px;
+      color: #ff6b9d;
+      font-weight: 600;
+      margin-bottom: 15px;
+      display: block;
+      text-align: center;
+    }
+
+    .name-input {
+      width: 100%;
+      padding: 18px 25px;
+      font-size: 18px;
+      border: 3px solid #ffb3d1;
+      border-radius: 50px;
+      outline: none;
+      font-family: 'Quicksand', sans-serif;
+      transition: all 0.3s;
+      background: rgba(255, 240, 245, 0.8);
+      color: #ff6b9d;
+      font-weight: 600;
+    }
+
+    .name-input:focus {
+      border-color: #ff6b9d;
+      box-shadow: 0 0 0 4px rgba(255, 182, 193, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .name-input::placeholder {
+      color: #ffb3d1;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      font-size: 20px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+      font-family: 'Quicksand', sans-serif;
+      animation: pulse 2s infinite;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 25px rgba(255, 107, 157, 0.5);
+    }
+
+    .message-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 30px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(255, 182, 193, 0.4);
+      display: none;
+      animation: scaleIn 0.5s ease;
+      border: 3px solid rgba(255, 182, 193, 0.3);
+      width: 100%;
+    }
+
+    .message-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      color: #ff6b9d;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .message-content {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #555;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .back-btn, .change-btn {
+      padding: 12px 30px;
+      background: linear-gradient(135deg, #ffb3d1 0%, #ffc4dd 100%);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(255, 179, 209, 0.4);
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .change-btn {
+      background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+      box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+    }
+
+    .back-btn:hover, .change-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .flying-photo {
+      position: fixed;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      pointer-events: none;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      object-fit: cover;
+      background: white;
+    }
+
+    .flying-photo.emoji {
+      border: none;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .error-message {
+      color: #ff6b9d;
+      text-align: center;
+      margin-top: 15px;
+      font-weight: 600;
+      display: none;
+      animation: shake 0.5s;
+    }
+
+    /* Animations */
+    @keyframes titleReveal {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes charAppear {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes btnAppear {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(10deg); }
+    }
+
+    @keyframes glow {
+      0%, 100% { text-shadow: 0 0 10px rgba(255, 182, 193, 0.8), 0 0 20px rgba(255, 182, 193, 0.6); }
+      50% { text-shadow: 0 0 20px rgba(255, 182, 193, 1), 0 0 30px rgba(255, 182, 193, 0.8); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4); }
+      50% { box-shadow: 0 4px 20px rgba(255, 107, 157, 0.6), 0 0 0 8px rgba(255, 107, 157, 0); }
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+
+    @keyframes light-ans {
+      0% { opacity: 0; transform: translateY(0); }
+      25% { opacity: 1; transform: translateY(-5vmin) translateX(-2vmin); }
+      50% { opacity: 1; transform: translateY(-15vmin) translateX(2vmin); }
+      75% { transform: translateY(-20vmin) translateX(-2vmin); }
+      100% { transform: translateY(-30vmin); opacity: 0; }
+    }
+
+    @keyframes moving-flower-1 {
+      0%, 100% { transform: rotate(2deg); }
+      50% { transform: rotate(-2deg); }
+    }
+
+    @keyframes moving-flower-2 {
+      0%, 100% { transform: rotate(18deg); }
+      50% { transform: rotate(14deg); }
+    }
+
+    @keyframes moving-flower-3 {
+      0%, 100% { transform: rotate(-18deg); }
+      50% { transform: rotate(-20deg); }
+    }
+
+    @keyframes blooming-leaf-right {
+      0% { transform-origin: left; transform: rotate(70deg) rotateY(30deg) scale(0); }
+    }
+
+    @keyframes blooming-leaf-left {
+      0% { transform-origin: right; transform: rotate(-70deg) rotateY(30deg) scale(0); }
+    }
+
+    @keyframes grow-flower-tree {
+      0% { height: 0; }
+    }
+
+    @keyframes blooming-flower {
+      0% { transform: scale(0); }
+    }
+
+    @keyframes flyAround {
+      0% { 
+        transform: translate(-50%, -50%) scale(0); 
+        opacity: 0; 
+      }
+      5% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1); 
+      }
+      25% { 
+        transform: translate(calc(var(--tx) - 50%), calc(var(--ty) - 50%)) rotate(calc(var(--rot) * 1deg)) scale(1); 
+      }
+      50% { 
+        transform: translate(calc(var(--tx) * -0.6 - 50%), calc(var(--ty) * -0.6 - 50%)) rotate(calc(var(--rot) * 2deg)) scale(0.9); 
+      }
+      75% { 
+        transform: translate(calc(var(--tx) * 0.4 - 50%), calc(var(--ty) * 0.8 - 50%)) rotate(calc(var(--rot) * 3deg)) scale(0.85); 
+      }
+      90% { 
+        opacity: 1;
+        transform: translate(calc(var(--tx) * -0.3 - 50%), calc(var(--ty) * -0.4 - 50%)) rotate(calc(var(--rot) * 4deg)) scale(0.8); 
+      }
+      100% { 
+        opacity: 0; 
+        transform: translate(calc(var(--tx) * 0.2 - 50%), calc(var(--ty) * 0.2 - 50%)) rotate(calc(var(--rot) * 5deg)) scale(0.5); 
+      }
+    }
+
+    @media (max-width: 768px) {
+      .flowers { transform: scale(0.45); }
+      .main-title { font-size: 36px; }
+      .subtitle { font-size: 20px; }
+      .input-card, .message-card { padding: 25px; }
+      .welcome-title { font-size: 50px; letter-spacing: 2px; }
+    }
+  </style>
 </head>
+<body class="not-loaded">
+  <!-- Welcome Screen -->
+  <div class="welcome-screen" id="welcomeScreen">
+    <div class="night"></div>
+    
+    <div class="flower-container">
+      <div class="flowers">
+        <div class="flower flower--1">
+          <div class="flower__leafs flower__leafs--1">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__white-circle"></div>
+            <div class="flower__light flower__light--1"></div>
+            <div class="flower__light flower__light--2"></div>
+            <div class="flower__light flower__light--3"></div>
+            <div class="flower__light flower__light--4"></div>
+            <div class="flower__light flower__light--5"></div>
+            <div class="flower__light flower__light--6"></div>
+            <div class="flower__light flower__light--7"></div>
+            <div class="flower__light flower__light--8"></div>
+          </div>
+          <div class="flower__line">
+            <div class="flower__line__leaf flower__line__leaf--1"></div>
+            <div class="flower__line__leaf flower__line__leaf--2"></div>
+            <div class="flower__line__leaf flower__line__leaf--3"></div>
+            <div class="flower__line__leaf flower__line__leaf--4"></div>
+          </div>
+        </div>
 
-<body>
-  <!-- Background -->
-  <div class="night"></div>
+        <div class="flower flower--2">
+          <div class="flower__leafs flower__leafs--2">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__white-circle"></div>
+            <div class="flower__light flower__light--1"></div>
+            <div class="flower__light flower__light--2"></div>
+            <div class="flower__light flower__light--3"></div>
+            <div class="flower__light flower__light--4"></div>
+            <div class="flower__light flower__light--5"></div>
+            <div class="flower__light flower__light--6"></div>
+            <div class="flower__light flower__light--7"></div>
+            <div class="flower__light flower__light--8"></div>
+          </div>
+          <div class="flower__line">
+            <div class="flower__line__leaf flower__line__leaf--1"></div>
+            <div class="flower__line__leaf flower__line__leaf--2"></div>
+            <div class="flower__line__leaf flower__line__leaf--3"></div>
+            <div class="flower__line__leaf flower__line__leaf--4"></div>
+          </div>
+        </div>
 
-  <!-- Title -->
-  <h1 class="title"></h1>
+        <div class="flower flower--3">
+          <div class="flower__leafs flower__leafs--3">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__white-circle"></div>
+            <div class="flower__light flower__light--1"></div>
+            <div class="flower__light flower__light--2"></div>
+            <div class="flower__light flower__light--3"></div>
+            <div class="flower__light flower__light--4"></div>
+            <div class="flower__light flower__light--5"></div>
+            <div class="flower__light flower__light--6"></div>
+            <div class="flower__light flower__light--7"></div>
+            <div class="flower__light flower__light--8"></div>
+          </div>
+          <div class="flower__line">
+            <div class="flower__line__leaf flower__line__leaf--1"></div>
+            <div class="flower__line__leaf flower__line__leaf--2"></div>
+            <div class="flower__line__leaf flower__line__leaf--3"></div>
+            <div class="flower__line__leaf flower__line__leaf--4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <!-- Button -->
-  <div style="position: absolute; top: 60vh; width: 100%; display: flex; justify-content: center;">
-    <a href="flower.html" class="btn">
-      <svg height="24" width="24" fill="#FFFFFF" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" class="sparkle">
-        <path
-          d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z">
-        </path>
-      </svg>
-
-      <span class="text">Open</span>
-    </a>
+    <h1 class="welcome-title" id="welcomeTitle"></h1>
+    <button class="continue-btn" onclick="enterMainPage()">Tiếp tục 💖</button>
   </div>
 
-  <script src="js/index.js"></script>
-</body>
+  <!-- Background decorations - will be populated dynamically -->
+  <div id="backgroundDecorations"></div>
 
+  <!-- Main Content -->
+  <div class="main-content" id="mainContent">
+    <div class="header">
+      <h1 class="main-title">Ngày của những đóa hoa</h1>
+      <p class="subtitle">20 • 10 ✨</p>
+    </div>
+
+    <div class="input-card" id="inputCard">
+      <label class="input-label">💐 Nhập tên của bạn để nhận lời nhắn đặc biệt 💐</label>
+      <input type="text" class="name-input" id="nameInput" placeholder="Ví dụ: Thảo An, Quỳnh Anh...">
+      <button class="submit-btn" onclick="showMessage()">🌸 Xem lời nhắn 🌸</button>
+      <div class="error-message" id="errorMessage">Rất tiếc, tên bạn chưa có trong danh sách! 💔</div>
+    </div>
+
+    <div class="message-card" id="messageCard">
+      <h2 class="message-title" id="messageTitle">Gửi bạn yêu quý 💖</h2>
+      <p class="message-content" id="messageContent"></p>
+      <div class="action-buttons">
+        <button class="back-btn" onclick="goBack()">🌺 Quay lại 🌺</button>
+     
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Database of messages and photos
+    const messages = {
+      'Thảo An': {
+        title: 'Em xinh Thảo An say Hi! to 20.10^^!',
+        content: 'Cậu chính là một "vùng bình yên" của tập thể B1K40. Trong lớp, cậu lúc nào cũng nhẹ nhàng, quan tâm đến mọi người xung quanh. Nếu sự thông minh là ánh sáng thì sự tốt bụng ấy của cậu là điều khiến nó trở nên ấm áp. Chúc cho em xinh Thảo An sẽ ngày càng giỏi giang và xinh đẹp, thành công và có một 20.10 được thương yêu nhiều như cậu xứng đáng nhé <3 🌸. B1-boiz mãi ủng hộ cậu🌼',
+        photos: [
+          'ta1.png',
+          'ta2.png',
+          'ta3.png',
+          'ta4.png',
+          'ta5.png'
+        ]
+      },
+      'Quỳnh Anh': {
+        title: 'Em xinh Quỳnh Anh say Hi! to 20.10!💖',
+        content: 'Biết gì chưa?????? Cậu là vitamin vui vẻ của B1K40 đó !!!!!!, thế nào lại pha tí bựa, lại nêm nếm thật thà đến đau bụng mà đáng quý, dễ nghiện (?) mà lại cực tốt :O. Chúc cho "cô gái m52" (chưa tới nữa) đáng yêu sẽ luôn hạnh phúc, sống đúng điệu <3, farm thành công, miễn nhiễm lo âu, ưu tư và luôn yêu bản thân như cách cậu quan tâm tụi này nha!. B1-boiz mãi ủng hộ cậu🌼',
+        photos: [
+          'qa1.png',
+          'qa2.png',
+          'qa3.png',
+          'qa4.png'
+        ]
+      },
+      'Thanh Hiền': {
+        title: 'Em xinh Thanh Hiền say Hi! to 20.10!',
+        content: '"Nhỏ con nhưng không nhỏ nhoi", dù muốn nói chuyện phải cúi đầu mới thấy (hêh) mít ước nhưng lại lực điền lạ thường - đúng chuẩn "ngoan hiền như mèo - hiểm độc như rắn" :OOOO. Trôn trôn xíu thui, chúc cho Bộ trưởng năng động, dễ thương và đầy trách nhiệm này có một 20.10 thật hạnh phúc, xinh đẹp và luôn duy trì "năng lượng hỗn hợp" mà ai thấy cũng quý nhé! B1-boiz mãi ủng hộ cậu 🌼',
+        photos: [
+          'hien1.png',
+          'hien2.png',
+          'hien3.png',
+          'hien4.png'
+        ]
+      },
+      'Mai Hân': {
+        title: 'Em xinh Mân Hai say Hi! to 20.10!^^',
+        content: 'Người ta có thể mệt vì deadline, còn cậu lại mệt vì ... quá tài lăng! Người đâu mà vừa có thể thiết kế cực đỉnh, chạy sô đẳng cấp mà nhảy thì mượt miễn bàn B). Chúc "chị đẹp dễ quạu" của B1K40 luôn tràn đầy năng lượng, xinh xắn, thành công với Medical Path mà vẫn giữ được vibe "hiền búng ra muối nhé!. B1-boiz mãi ủng hộ cậu!🌼',
+        photos: [
+          'han1.png',
+          'han2.png',
+          'han3.png',
+          'han4.png'
+        ]
+      },
+      'Trà Ly': {
+        title: 'Em xinh Tlyph say Hi! to 20.10!><💖',
+        content: 'Từ HLE đến lớp học, ở đâu có cậu là ở đó có tiếng cười ("HÁ HÁ HÁ HÁ HÁ"). Chúc "học bá hay than ngu" của lớp luôn vui vẻ, giữ cho mình nụ cười cùng cái mỏ "chúm chím" thương hiệu. Chúc cậu 20.10 này thắng cả đời lẫn game nhé!!. B1-boiz mãi ủng hộ cậu 🌼',
+        photos: [
+          'ly1.png',
+          'ly2.png',
+          'ly3.png',
+          'ly4.png'
+        ]
+      },
+      'Bảo Trân': {
+        title: 'Em xinh Bảo Trân say Hi! to 20.10!><💖',
+        content: 'Chúc bộ não thiên tài của lớp ngày 20/10 thật xinh, thật vui và thật tâm từ chối xác lập mối quan hệ với bài tập =)))))). Cảm ơn cậu, vì vì vì vì vì vì vì vì đã học giỏi lại còn siêu hòa đồng, luôn giúp đỡ mọi người như gu gồ sống. Chúc cậu luôn rạng rỡ, tự tin và lưu mãi nét duyên dáng này vào cài đặt gốc nhé <3. B1-boiz mãi ủng hộ cậu🌼',
+        photos: [
+          'tran1.png',
+          'tran2.png',
+          'tran3.png'
+        ]
+      },
+      'Anh Thy': {
+        title: 'Em xinh Anh Thy say Hi! to 20.10!🌼',
+        content: 'Cậu không chỉ hòa đồng mà còn vô cùng tài giỏi nữa! Mang trong mình sự dễ thương, đôi lúc hướng nội nhưng vẫn tỏa sáng theo cách riêng của mình. Cảm ơn Thy vì đã khiến lũ B1 này là một lớp vừa vui, vừa đỉnh. Mong nụ cười hồn nhiên và năng lượng tươi sáng ấy luôn xuất hiện trên nét mặt của cậu nhé!! Chúc Anh Thy luôn tự tin, hạnh phúc và gặp nhiều điều tuyệt vời trong hành trình phía trước! <3. B1-boiz mãi ủng hộ cậu💖',
+        photos: [
+          'thy1.png',
+          'thy2.png',
+          'thy3.png',
+          'thy4.png'
+        ]
+      },
+      'Đan Khanh': {
+        title: 'Em xinh KLe say Hi! to 20.10!💖',
+        content: 'Thủ quỹ nhà B1K40 ta không chỉ làm việc giữ tiền, chị ta còn nắm giữ cả niềm tin của mỗi B1K40-er đấy nhé B). Chúc cho em xinh KLe toàn năng luôn giữ vững phong độ, sắc xinh tăng vọt và có những ngày tràn đầy niềm vui, lấy nụ cười đè chết stress và leo rank mượt mà như cách các tình huống trong lớp được cậu xử gọn nhé!!.  B1-boiz mãi ủng hộ cậu🌼',
+        photos: [
+          'khanh1.png',
+          'khanh2.png',
+          'khanh3.png'
+        ]
+      },
+      'Phúc Nguyên': {
+        title: 'Gửi Phúc Nguyên xinh đẹp 💖',
+        content: '20/10 vui vẻ nha chị pnguyen iu🥰 .Chúc chị ngày càng đảm đang, da dẻ mịn màng, học thật giỏi để gánh bọn em nhaa 😘 _NBNT',
+        photos: [
+          'red1.png',
+          'red2.png',
+          'red3.png',
+          'red4.png',
+          'red5.png',
+          'red6.png'
+        ]
+      },
+      'Cô Thanh': {
+        title: 'Cô xinh Thanh Thanh 💖',
+        content: 'Chúc cô giáo xinh đẹp, thông minh và "đỉnh của chóp" có một ngày 20/10 thật vui vẻ và tràn ngập hoa tươi 💐💐. Cảm ơn cô vì đã luôn kiên nhẫn với lũ học trò vừa nghịch vừa lười, yêu thương tụi em hết lòng. Chúc cô luôn giữ nụ cười rạng rỡ, có sức khỏe dồi dào và lúc nào cũng trẻ trung như ... mới ra trường ạ😘. B1-boiz mãi mến cô!!!',
+        photos: [
+          'co (1).png',
+          'co (2).png',
+          'co (3).png'
+        ]
+      },
+      'default': {
+        title: 'Gửi bạn thân yêu 💖',
+        content: 'Chúc mừng ngày Phụ nữ Việt Nam 20/10! Chúc bạn luôn xinh đẹp, hạnh phúc và thành công trong mọi lĩnh vực. Hãy tự hào về chính mình và tỏa sáng theo cách riêng của bạn! 🌸🌺🌹',
+        photos: [] // Không có ảnh, sẽ dùng emoji
+      }
+    };
+
+    // Current active name for background photos
+    let currentName = null;
+
+    // Initialize page
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        document.body.classList.remove('not-loaded');
+        animateWelcomeText();
+        displayDefaultBackground();
+      }, 100);
+    });
+
+    function displayDefaultBackground() {
+      // Display default emoji flowers in background
+      const container = document.getElementById('backgroundDecorations');
+      const positions = [
+        { top: '10%', left: '5%', emoji: '🌸', delay: '0s' },
+        { top: '20%', right: '10%', emoji: '🌺', delay: '2s' },
+        { top: '60%', left: '8%', emoji: '🌹', delay: '4s' },
+        { bottom: '15%', right: '5%', emoji: '🌼', delay: '1s' },
+        { top: '40%', left: '15%', emoji: '🌷', delay: '3s' },
+        { top: '70%', right: '20%', emoji: '🌻', delay: '5s' },
+        { top: '15%', right: '15%', emoji: '💕', delay: '0s' },
+        { bottom: '20%', left: '10%', emoji: '💖', delay: '1.5s' },
+        { top: '50%', right: '8%', emoji: '💗', delay: '3s' }
+      ];
+
+      positions.forEach(pos => {
+        const el = document.createElement('div');
+        el.className = 'flower-bg emoji';
+        el.textContent = pos.emoji;
+        el.style.animationDelay = pos.delay;
+        Object.assign(el.style, pos);
+        container.appendChild(el);
+      });
+    }
+
+    function displayPersonalizedBackground(name) {
+      const container = document.getElementById('backgroundDecorations');
+      container.innerHTML = ''; // Clear existing
+
+      const data = messages[name];
+      
+      if (!data || !data.photos || data.photos.length === 0) {
+        displayDefaultBackground();
+        return;
+      }
+
+      const positions = [
+        { top: '10%', left: '5%', delay: '0s' },
+        { top: '20%', right: '10%', delay: '2s' },
+        { top: '60%', left: '8%', delay: '4s' },
+        { bottom: '15%', right: '5%', delay: '1s' },
+        { top: '40%', left: '15%', delay: '3s' },
+        { top: '70%', right: '20%', delay: '5s' },
+        { top: '15%', right: '15%', delay: '0s' },
+        { bottom: '20%', left: '10%', delay: '1.5s' },
+        { top: '50%', right: '8%', delay: '3s' }
+      ];
+
+      positions.forEach((pos, index) => {
+        const el = document.createElement('img');
+        el.className = 'flower-bg';
+        el.src = data.photos[index % data.photos.length];
+        el.style.animationDelay = pos.delay;
+        Object.assign(el.style, pos);
+        el.onerror = function() {
+          // If image fails to load, show emoji instead
+          const emoji = document.createElement('div');
+          emoji.className = 'flower-bg emoji';
+          emoji.textContent = '🌸';
+          emoji.style.animationDelay = pos.delay;
+          Object.assign(emoji.style, pos);
+          this.replaceWith(emoji);
+        };
+        container.appendChild(el);
+      });
+    }
+
+    function animateWelcomeText() {
+      const text = "Chào Mừng 20/10";
+      const titleElement = document.getElementById('welcomeTitle');
+      titleElement.innerHTML = '';
+      
+      for (let i = 0; i < text.length; i++) {
+        const span = document.createElement('span');
+        span.textContent = text[i];
+        span.style.animationDelay = `${2.5 + i * 0.1}s`;
+        titleElement.appendChild(span);
+      }
+    }
+
+    function enterMainPage() {
+      document.getElementById('welcomeScreen').classList.add('hidden');
+      setTimeout(() => {
+        document.getElementById('mainContent').classList.add('visible');
+      }, 500);
+    }
+
+    function showMessage() {
+      const nameInput = document.getElementById('nameInput');
+      const name = nameInput.value.trim();
+      const errorMessage = document.getElementById('errorMessage');
+      
+      if (name === '') {
+        errorMessage.style.display = 'block';
+        errorMessage.textContent = 'Vui lòng nhập tên của bạn! 💝';
+        setTimeout(() => {
+          errorMessage.style.display = 'none';
+        }, 3000);
+        return;
+      }
+
+      // Capitalize first letter of each word to match database format
+      const formattedName = name.split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(' ');
+
+      console.log('Input name:', name);
+      console.log('Formatted name:', formattedName);
+      console.log('Available names:', Object.keys(messages));
+      console.log('Message found:', messages[formattedName]);
+
+      currentName = formattedName;
+      const message = messages[formattedName];
+      
+      if (!message) {
+        errorMessage.style.display = 'block';
+        errorMessage.textContent = `Rất tiếc, tên "${formattedName}" chưa có trong danh sách! 💔 (Có: ${Object.keys(messages).join(', ')})`;
+        setTimeout(() => {
+          errorMessage.style.display = 'none';
+        }, 5000);
+        return;
+      }
+      
+      document.getElementById('messageTitle').textContent = message.title;
+      document.getElementById('messageContent').textContent = message.content;
+      
+      // Update background with personalized photos
+      displayPersonalizedBackground(formattedName);
+      
+      // Create flying photos animation
+      createFlyingElements(formattedName);
+      
+      // Hide input card and show message card
+      document.getElementById('inputCard').style.display = 'none';
+      document.getElementById('messageCard').style.display = 'block';
+    }
+
+    function createFlyingElements(name) {
+      const data = messages[name];
+      const hasPhotos = data && data.photos && data.photos.length > 0;
+      const fallbackEmojis = ['🌸', '🌺', '🌹', '🌼', '🌷', '💖', '💕', '✨'];
+      
+      for (let i = 0; i < 20; i++) {
+        const element = document.createElement('div');
+        element.className = 'flying-photo';
+        
+        if (hasPhotos) {
+          const img = document.createElement('img');
+          img.src = data.photos[i % data.photos.length];
+          img.style.width = '100%';
+          img.style.height = '100%';
+          img.style.borderRadius = '50%';
+          img.style.objectFit = 'cover';
+          img.onerror = function() {
+            // Fallback to emoji if image fails
+            element.classList.add('emoji');
+            element.innerHTML = fallbackEmojis[i % fallbackEmojis.length];
+          };
+          element.appendChild(img);
+        } else {
+          element.classList.add('emoji');
+          element.innerHTML = fallbackEmojis[i % fallbackEmojis.length];
+        }
+        
+        element.style.left = '50%';
+        element.style.top = '50%';
+        
+        const angle = (Math.PI * 2 * i) / 20;
+        const distance = 300 + Math.random() * 200;
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance;
+        const rot = Math.random() * 360;
+        
+        element.style.setProperty('--tx', `${tx}px`);
+        element.style.setProperty('--ty', `${ty}px`);
+        element.style.setProperty('--rot', rot);
+        element.style.animation = `flyAround 8s ease-in-out forwards`;
+        element.style.animationDelay = `${i * 0.05}s`;
+        
+        document.body.appendChild(element);
+        
+        setTimeout(() => {
+          element.remove();
+        }, 9000);
+      }
+    }
+
+    function goBack() {
+      document.getElementById('messageCard').style.display = 'none';
+      document.getElementById('inputCard').style.display = 'block';
+      // Reset to default background
+      displayDefaultBackground();
+      currentName = null;
+    }
+
+    function changeRecipient() {
+      document.getElementById('nameInput').value = '';
+      document.getElementById('nameInput').focus();
+      goBack();
+    }
+
+    // Allow Enter key to submit
+    document.addEventListener('DOMContentLoaded', function() {
+      const nameInput = document.getElementById('nameInput');
+      if (nameInput) {
+        nameInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            showMessage();
+          }
+        });
+      }
+    });
+  </script>
+</body>
 </html>
